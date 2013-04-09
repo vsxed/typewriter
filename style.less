@@ -44,7 +44,7 @@ body {
 }
 
 .pen {
-	max-width: 500px;
+	max-width: 540px;
 	margin: 0 auto;
 }
 
@@ -115,7 +115,7 @@ div {
 	background: @blue;
 	position: relative;
 	box-shadow: inset 0 1px 2px #5F74A9;
-	padding: 15px 10px;
+	padding: 15px 20px;
 	width: 100%;
 }
 
@@ -124,8 +124,6 @@ div {
 	max-width: 450px;
 	color: white;
 	line-height: 1.6em;
-
-
 }
 
 .cursor {
@@ -133,17 +131,17 @@ div {
 	display: inline-block;
 	vertical-align: -6px;
 	width: 1px;
+	content:'text';
+	margin-left: -5px;
 	color: white;
+	opacity: 1;
 	background: #FFF;
-	-webkit-animation: blink 1s infinite steps(2); 
+
+	&.invis {
+		width: 0px !important;
+	}
 }
 
-.text:focus>.cursor {
-	opacity:0;
+.term:focus + .cursor {
+	opacity: 0;
 }
-
-
-@-webkit-keyframes blink{
-  0% { width: 0; }
-  100%{ width: 1px; } 
-} 
