@@ -22,6 +22,25 @@ $.fn.wrapInTag = function(opts) {
 
 };
 
+function setCursor(node,pos){
+    var node = (typeof node == "string" || 
+    node instanceof String) ? document.getElementById(node) : node;
+        if(!node){
+            return false;
+        }else if(node.createTextRange){
+            var textRange = node.createTextRange();
+            textRange.collapse(true);
+            textRange.moveEnd(pos);
+            textRange.moveStart(pos);
+            textRange.select();
+            return true;
+        }else if(node.setSelectionRange){
+            node.setSelectionRange(pos,pos);
+            return true;
+        }
+        return false;
+    }
+
 // $('#search-term').keyup(function() {
 // 	$('#search-term').wrapInTag({
 // 	    words: ['world', 'red'],
@@ -37,10 +56,14 @@ $(function (){
               var matchitems = count('hello', arr);
               //console.log(matchitems);
               if(matchitems > totalcount){
-                $('#search-term').wrapInTag({
-				    words: ['world', 'red'],
-				    tag: '<strong>'
-				});
+                $('#search-term').each(function(){
+                  $(this).html(
+                    $(this).before('<strong>hello</strong>').text().replace(
+                      'hello',''))
+                });
+
+                    
+          
                 totalcount = matchitems;
               }
               if(matchitems < totalcount)
